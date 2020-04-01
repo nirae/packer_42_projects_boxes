@@ -1,0 +1,36 @@
+{
+  "builders": [
+    {
+      "name": "amd64-virtualbox",
+      "type": "virtualbox-iso",
+      "iso_url": "../iso_files/RainFall.iso",
+      "iso_checksum": "37805631fb424dfe643f1fb900e5ac8a",
+      "iso_checksum_type": "md5",
+      "bundle_iso": true,
+      "guest_os_type": "Linux_64",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": "",
+      "headless": false,
+      "http_directory": ".",
+      "disk_size": "10000",
+      "ssh_username": "level0",
+      "ssh_password": "level0",
+      "ssh_port": 4242,
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "1024"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"]
+      ],
+      "ssh_wait_timeout": "3m",
+      "boot_wait": "45s"
+    }
+  ],
+
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "rainfall-{{.BuildName}}.box",
+      "include": ["../iso_files/RainFall.iso"],
+      "vagrantfile_template": "./Vagrantfile"
+    }
+  ]
+}

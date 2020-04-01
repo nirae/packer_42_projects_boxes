@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "nirae/42_override"
+ 
+  config.vm.provider "virtualbox" do |v|
+    iso_file = File.join(File.dirname(__FILE__), "OverRide.iso")
+    v.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", "0", "--device", "1", "--type", "dvddrive", "--medium", iso_file]
+  end
+
+  config.vm.network :forwarded_port, guest: 4242, host: 4242, id: "ssh", auto_correct: true
+  config.ssh.port = 4242
+  config.ssh.username = "level00"
+  config.ssh.password = "level00"
+
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.ssh.insert_key = false
+end

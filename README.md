@@ -21,7 +21,7 @@ First, download the iso you wan't in the `iso_files` directory and verify the ch
 
 All boxes work with vagrant and VirtualBox ONLY. Be sure to have VBox and vagrant installed
 
-Use the make commands in the project directory you wan't to build. exemple : snowcrash
+Use the make commands in the project directory you wan't to build. exemple : `snowcrash`
 
 ### Build the box
 
