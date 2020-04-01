@@ -1,0 +1,5 @@
+iso_files/*
+*/vm
+*/*.box
+*/.vagrant
+*/packer_cache

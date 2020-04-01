@@ -1,0 +1,36 @@
+{
+  "builders": [
+    {
+      "name": "amd64-virtualbox",
+      "type": "virtualbox-iso",
+      "iso_url": "../iso_files/SnowCrash.iso",
+      "iso_checksum": "16ade8a197300c61cee10bcf6552d3f5",
+      "iso_checksum_type": "md5",
+      "bundle_iso": true,
+      "guest_os_type": "Linux_64",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": "",
+      "headless": false,
+      "http_directory": ".",
+      "disk_size": "10000",
+      "ssh_username": "level00",
+      "ssh_password": "level00",
+      "ssh_port": 4242,
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "1024"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"]
+      ],
+      "ssh_wait_timeout": "3m",
+      "boot_wait": "45s"
+    }
+  ],
+
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "snowcrash-{{.BuildName}}.box",
+      "include": ["../iso_files/SnowCrash.iso"],
+      "vagrantfile_template": "./Vagrantfile"
+    }
+  ]
+}
