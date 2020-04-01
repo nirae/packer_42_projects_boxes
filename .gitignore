@@ -1,4 +1,4 @@
-iso_files/*
+iso_files/*.iso
 */vm
 */*.box
 */.vagrant
