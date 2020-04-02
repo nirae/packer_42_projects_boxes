@@ -1,0 +1,33 @@
+{
+  "builders": [
+    {
+      "name": "amd64-virtualbox",
+      "type": "virtualbox-iso",
+      "iso_url": "../iso_files/Darkly_i386.iso",
+      "iso_checksum": "66d1a5d77c33a935ccb219b97f207b6a",
+      "iso_checksum_type": "md5",
+      "communicator": "none",
+      "bundle_iso": true,
+      "guest_os_type": "Linux_64",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": "",
+      "headless": false,
+      "http_directory": ".",
+      "disk_size": "10000",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "1024"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"]
+      ],
+      "boot_wait": "45s"
+    }
+  ],
+
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "darkly-{{.BuildName}}.box",
+      "include": ["../iso_files/Darkly_i386.iso"],
+      "vagrantfile_template": "./Vagrantfile"
+    }
+  ]
+}
