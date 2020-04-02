@@ -1,0 +1,19 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "nirae/42_boot2root"
+ 
+  config.vm.provider "virtualbox" do |v|
+    iso_file = File.join(File.dirname(__FILE__), "BornToSecHackMe-v1.1.iso")
+    v.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", "0", "--device", "1", "--type", "dvddrive", "--medium", iso_file]
+  end
+
+  config.vm.network "public_network"
+
+  config.vm.communicator = ""
+
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.ssh.insert_key = false
+end
